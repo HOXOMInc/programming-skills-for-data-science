@@ -1,0 +1,42 @@
+---
+title: "Life Expectancy Report"
+output: html_document
+---
+```{r setup, include = FALSE}
+# `analysis.R`を実行して結果をロードする
+# `include = FALSE`が指定されているためエラーやメッセージは表示されない
+source("analysis.R")
+
+# `knitr`ライブラリをロードする
+library("knitr")
+```
+
+## Overview
+This is a brief report regarding life expectancy for each country from
+1960 to 2015 ([source](https://data.worldbank.org/indicator/SP.DYN.LE00.IN)).
+The data reveals that the country with the longest life expectancy was
+`r longest_le$Country.Name`, with a life expectancy of `r longest_le$expectancy`.
+That life expectancy was `r le_difference` years longer than the life expectancy
+in `r shortest_le$Country.Name`.
+Here are the countries whose life expectancy **improved the most** since 1960.
+
+```{r top_10_gain, echo = FALSE}
+# top_10_tableをkable()で表示する
+# この時、表示する列を指定する
+kable(top_10_gain, col.names = c("Country", "Change in Life Expectancy"))
+```
+
+## Life Expectancy in 2015
+To identify geographic variations in life expectancy,
+here is a choropleth map of life expectancy in 2015:
+
+```{r le_map, echo = FALSE}
+# `rworldmap`パッケージを用いて地図をレンダリングする
+mapCountryData(
+  mapped_data, # indicate the data to map
+  mapTitle = "Life Expectancy in 2015",
+  nameColumnToPlot = "X2015",
+  addLegend = F, # exclude the legend
+  colourPalette = brewer.pal(7, "Blues") # set the color palette
+)
+```
