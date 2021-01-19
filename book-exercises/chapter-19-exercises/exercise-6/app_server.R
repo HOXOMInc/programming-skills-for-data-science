@@ -15,6 +15,10 @@ joined_data <- left_join(df, state_codes, by="state")
 joined_data <- joined_data %>% mutate(ratio = votes/population * 100000)
 
 # サーバ関数を定義して下さい
+server <- function(input, output) { 
   
   # `renderPlotly()`を用いて地図を描画して下さい
-  
+  output$map <- renderPlotly({ 
+      return(build_map(joined_data, input$mapvar))
+  })
+}

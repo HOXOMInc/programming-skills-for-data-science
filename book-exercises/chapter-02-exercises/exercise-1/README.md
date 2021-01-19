@@ -6,26 +6,34 @@
 
 ```bash
 # Documents(ドキュメント)ディレクトリに移動して下さい
+cd ~/Documents
 
 # "quick-exercise"という名前のフォルダを作成して下さい
+mkdir quick-exercise
 
 # 作成した"quick-exercise"フォルダに移動して下さい
+cd quick-exercise
 
 # Atomなどのテキストエディタを用いて"constitution.txt"というファイルを"quick-exercise"フォルダに作成して下さい
 # Atomなどのテキストエディタを用いるためコマンドは特に使いません
 
 # 作成した"constitution.txt"というファイルが存在するかどうかを確認して下さい
+ls
 
 # アメリカ合衆国憲法をオンラインで検索し、アメリカ合衆国憲法を"constitution.txt"にコピーして保存して下さい
 # Atomなどのテキストエディタを用いるためコマンドは特に使いません
 
 # lessコマンドを用いてコマンドラインツールから"constitution.txt"の中身を確認して下さい
+less constitution.txt
 
 # あなたのパソコンの"Desktop"フォルダに移動して下さい
+cd ../../Desktop
 
 # lessコマンドを用いて"Desktop"フォルダから"Documents/quick-exercise/constitution.txt"の中身を確認して下さい
+cat ../Documents/quick-exercise/constitution.txt
 
 # コマンド1行でファイルを10個作成して下さい。続けて作成したファイルを全て消して下さい。
-
+touch myFile{1..10}.txt
+rm myFile*.txt
 
 ```

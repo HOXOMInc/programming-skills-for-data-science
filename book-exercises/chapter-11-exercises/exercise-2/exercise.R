@@ -7,35 +7,43 @@
 library(fueleconomy)
 
 # `dplyr`パッケージをインストールしてロードして下さい
-
+install.packages("dplyr")
+library("dplyr")
 
 # View()を用いてvehiclesデータセットの中身を確認して下さい
-
+View(vehicles)
 
 # 車のメーカ(make)の列を抽出してベクトルとして変数に代入して下さい
-
+makes <- select(vehicles, make)
 
 # `distinct()`を用いて車のメーカのユニークな値を抽出して下さい
-
+nrow(distinct(vehicles, make))
 
 # 1997年に製造された車種を抽出して下さい
-
+cars_1997 <- filter(vehicles, year == 1997)
 
 # 高速道路の燃費(`hwy`)順に1997年に製造された車をソートして下さい
-
+cars_1997 <- arrange(cars_1997, hwy)
 
 # 1997年に製造された車を対象に、平均燃費を算出して下さい
 # 平均燃費の算出には高速道路の燃費（`hwy`）と市街地での燃費(`cty`)の平均を用いて下さい
-
+cars_1997 <- mutate(cars_1997, average = (hwy + cty) / 2)
 
 # 燃費が"20 miles/gallon"以上の二輪自動車を抽出して変数に代入して下さい
-
+two_wheel_20_mpg <- filter(vehicles, drive == "2-Wheel Drive", cty > 20)
 
 # この変数の中から最も燃費(`hwy`)が悪い二輪自動車を抽出して下さい
-
+filtered <- filter(two_wheel_20_mpg, hwy == min(hwy))
+worst_hwy <- select(filtered, id)
 
 # `make_year_filter()`という関数を定義して下さい
 # この関数の引数は年(`year_choice`)とメーカ（`make_choice`）であって、最も燃費(`hwy`)が良い車種を返り値とします
-
+make_year_filter <- function(make_choice, year_choice) {
+  filtered <- filter(vehicles, make == make_choice, year == year_choice)
+  filtered <- filter(filtered, hwy == max(hwy))
+  selected <- select(filtered, model)
+  selected
+}
 
 # 1995年にHondaで最も燃費の良い車種を抽出して下さい
+make_year_filter("Honda", 1995)

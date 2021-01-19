@@ -2,24 +2,33 @@
 
 # `words`という変数に、6以上の文字列を要素として持つベクトルを代入して下さい
 # 文字が思いつかない/必要あれば Google で random word generator と検索してみて下さい
-
+words <- c("the", "quick", "brown", "fox", "jumped", "over", "lazy", "dog")
 
 # `words_of_the_day`という変数に、`words`に"is the word of the day!"という文字列を加えて代入して下さい
 # ボーナスエクササイズ： `words`をシングルクォート(')で囲み、"is the word of the day!"という文字列を加えて`words_of_the_day`という変数に代入して下さい
-
+words_of_the_day <- paste0("'", words, "' is the word of the day!")
+words_of_the_day
 
 # `a_f_words`という変数に、`words`の要素でaからfのアルファベットから始まる文字列を要素とするベクトルを代入して下さい
 # ヒント: <= オペレータを用いることで、fより前に来るアルファベットかどうかを判定出来ます！
 # アドバイス: wordsの全ての要素は小文字(lower-case)にしておいて下さい
-
+a_f_words <- words[substring(words, 1, 1) <= "f"]
+a_f_words
 
 # `g_m_words`という変数に、`words`の要素でgからmのアルファベットから始まる文字列を要素とするベクトルを代入して下さい
+g_m_words <- words[words >= "g" & substring(words, 1, 1) <= "m"]
+g_m_words
 
+# 上記問題に対する別の解答
+g_words <- words[words >= "g"]
+g_m_words <- g.words[g_words <= "m"]
 
 # word_bin()という関数を定義して下さい
 # この関数は`words`ベクトル、2文字のアルファベットを引数とします
 # また、この関数は引数の2文字のアルファベットの間のアルファベットから始まる文字列を要素とするベクトルを返り値とします
-
+word_bin <- function(words, start, end){
+  words[words >= start & substring(words, 1, 1) <= end]
+}
 
 # `word_bin()`を用いて、`words`のうち`e`から`q`の間の英単語から始まる単語を抽出して下さい
-
+word_bin(words, "e", "q")
